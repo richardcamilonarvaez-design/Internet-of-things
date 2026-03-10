@@ -1,4 +1,3 @@
-
 int LEDS[3]={13, 12, 11};
   
 void setup() {
