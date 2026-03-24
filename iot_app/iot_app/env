@@ -1,0 +1,13 @@
+USE_LOCAL_DB=False #False para Supabase, True para local
+
+DB_NAME=postgres
+DB_USER=postgres.amduyllqrsjdtxeohiod
+DB_PASSWORD=9137NARJoker2005
+DB_HOST=aws-0-us-west-2.pooler.supabase.com
+DB_PORT=6543
+
+LOCAL_DB_NAME=iot_db
+LOCAL_DB_USER=postgres
+LOCAL_DB_PASSWORD=
+LOCAL_DB_HOST=localhost
+LOCAL_DB_PORT=5432
