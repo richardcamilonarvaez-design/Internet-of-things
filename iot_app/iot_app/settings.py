@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'weather_station',
 ]
 
 MIDDLEWARE = [
@@ -76,34 +77,38 @@ WSGI_APPLICATION = 'iot_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-USE_LOCAL_DB = os.getenv('USE_LOCAL_DB') == 'True'
+USE_LOCAL_DB = os.getenv('USE_LOCAL_DB', 'False') == 'True'
 
 if USE_LOCAL_DB:
+    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('LOCAL_DB_NAME'),
-            'USER': os.getenv('LOCAL_DB_USER'),
-            'PASSWORD': os.getenv('LOCAL_DB_PASSWORD'),
-            'HOST': os.getenv('LOCAL_DB_HOST'),
-            'PORT': os.getenv('LOCAL_DB_PORT'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT'),
+            'NAME': os.getenv('LOCAL_DB_NAME', 'iot_db'),
+            'USER': os.getenv('LOCAL_DB_USER', 'postgres'),
+            'PASSWORD': os.getenv('LOCAL_DB_PASSWORD', 'unicesmag'),
+            'HOST': os.getenv('LOCAL_DB_HOST', 'localhost'),
+            'PORT': os.getenv('LOCAL_DB_PORT', '5432'),
             'OPTIONS': {
-                'sslmode': 'require',
+                'sslmode': 'disable', 
             },
         }
     }
+else:
 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'postgres'),
+            'USER': os.getenv('DB_USER', 'postgres.amduyllqrsjdtxeohiod'),
+            'PASSWORD': os.getenv('DB_PASSWORD', '9137NARJoker2005'),
+            'HOST': os.getenv('DB_HOST', 'aws-0-us-west-2.pooler.supabase.com'),
+            'PORT': os.getenv('DB_PORT', '6543'),
+            'OPTIONS': {
+                'sslmode': 'require',  
+            },
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
